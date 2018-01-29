@@ -1,11 +1,10 @@
 __author__ = 'chenmingcui'
 
 import os
-from seq import read_fasta_file
 import sys
-import csv
-#filename = sys.argv[1]
-import os
+
+filename = sys.argv[1]
+
 os.chdir("/Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference")
 # #def codon2aa(filename):
 #     """
@@ -86,42 +85,15 @@ for aa, codon_count in dict_2.items():
 #aa_result =list(dict_2.keys())            # keys are in a list
 #print("the genome of the file : %s" + %filename)
 f = open('count_result.txt','w')
-print("|AminoAcid|Codon|Count|")
+#print("|AminoAcid|Codon|Count|")
 f.write(("AminoAcid\tCodon\tCount\n"))
 codon_count_pair = list(dict_2.values()) # values are in a list   [{'GAT': 78, 'GAC': 18}, {'GTG': 38, 'GTA': 20, 'GTT': 50, 'GTC': 24}]
 for n in range (0,len(codon_count_pair)):
        codons =list(codon_count_pair[n].keys())
        for m in range (0,len(codons)):
            count = codon_count_pair[n][codons[m]]
-           #each_row = dict_1[codons[m]] + ',' + codons[m] + ',' + str(count)
-           #each_row = each_row.split(',')
-           #print("|" + dict_1[codons[m]] + " "*(9-len(dict_1[codons[m]])) + "|" + codons[m] + " "*(5-len(codons[m])) + "|" + str(count) + " "*(5-len(str(count))) + "|")
-#            result = print("|" + dict_1[codons[m]] + " "*(9-len(dict_1[codons[m]])) + "|" + codons[m] + " "*(5-len(codons[m])) + "|" + str(count) + " "*(5-len(str(count))) + "|")
-#
-#            with open('outfile.txt','w') as outfile:
-#               outfile.write(result)
-#print("|" + dict_1[codons[m]] + " "*(9-len(dict_1[codons[m]])) + "|" + codons[m] + " "*(5-len(codons[m])) + "|" + str(count) + " "*(5-len(str(count))) + "|")
-# outfile.close()
-           print( dict_1[codons[m]] + codons[m]  + str(count))
+           #print( dict_1[codons[m]] + codons[m]  + str(count))
            f.write(dict_1[codons[m]] + '\t' + codons[m] + '\t' + str(count) + '\n')
 f.close()
 
 
-           f = open('count_result.txt','w')
-           result = "|" + dict_1[codons[m]] + " "*(9-len(dict_1[codons[m]])) + "|" + codons[m] + " "*(5-len(codons[m])) + "|" + str(count) + " "*(5-len(str(count))) + "|"
-           f.write(result)
-           f.close()
-
-
-
-          # each_row = dict_1[codons[m]] + "\t" + codons[m] + "\t" + str.count + "\n"
-          # #each_row = each_row.split()
-          # table = table + each_row
-          #
-          # with open('result.csv','w') as csvfile:
-          #      fieldnames = ['Amino Acid', 'Codon', 'Count']
-          #      writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-          #      writer.writeheader()
-          #      writer.writerow(dict_1[codons[m]] + "," + codons[m] + str(count) + "\n")
-          #
-          #
