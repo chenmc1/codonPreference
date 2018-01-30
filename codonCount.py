@@ -98,5 +98,5 @@ def codonCount(filename):
 
 ## now test it:
 
-codonCount("filename")
+codonCount(filename)
 
