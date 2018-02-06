@@ -123,7 +123,7 @@ def Main():
 
     parser.add_argument("infile", help = "path/to/your/cds.fasta file, you must feed at least one cds.fasta file or multiple cds.fasta files, speperated by comma")
     parser.add_argument("--outputDir", help="path/to/your/output_directory")
-    parser.add_argument("--prefix", help="a few characters of prefix to tag your output result files, e.g. gsf533_; multiple prefixes should be passed correspondingly with your multiple input files,spereted by comma")
+    parser.add_argument("--prefix", help="a few characters of prefix to tag your output result files, e.g. sample1_; multiple prefixes should be passed correspondingly with your multiple input files,spereted by comma")
     args = parser.parse_args()
 
     infiles = args.infile.split(",")
