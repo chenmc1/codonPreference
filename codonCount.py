@@ -1,12 +1,18 @@
+#!/usr/bin/python
 __author__ = 'chenmingcui'
 
 
 import os
 import sys
+import argparse
+from Bio import SeqIO
+from Bio.Seq import Seq
+from os.path import join
 
-filename = sys.argv[1]
+#filename = sys.argv[1:]
+#outpath = sys.argv[2]
 
-def codonCount(filename):
+def codonCount(filename,output_path,each_prefix):
     """
     This function is to count codon useage in your transcriptome.
     The input file is the cds fasta file that generated from transdecoder.
@@ -65,6 +71,22 @@ def codonCount(filename):
             seqs[name]=seqs[name]+line
     f.close()
 
+    ## input file quality check
+    for k,v in seqs.items():
+        #print(k,v)
+        if len(v) % 3 != 0:
+            print("Warning: You have at least one transcript(%s) that is not in reading frame, be sure to estimate cds using TransDecoder" %k)
+            break
+        elif v[-3:].upper() not in ["TAA","TAG","TGA"]:
+            print("Warning: You have at least one transcript: %s that is not terminated by stop codon, be sure to estimate cds using TransDecoder" %k)
+            break
+        elif Seq(v).translate().find("*") < len(v)/3-1:
+            print("Warning: You have at least one transcript: %s that has a premature stop codon" %k)
+            break
+
+        else:
+            print("Input file quality pre-check passed!")
+
     ## now, seqs is a dictionary having all the seq_id and seq_sequence
     ## access to each transcript and count the codons
     seq =list(seqs.values())   # convert dictionary values into list otherwise cannot be indexed
@@ -76,12 +98,14 @@ def codonCount(filename):
             codon_count_dict = dict_2[aa]
             codon_count_dict[codon] += 1
 
+
     #for k, v in dict_2.items():   # dict2 now has the count updated, print to check
     #    print (k,v)
 
 
     ## print the count into a table
-    f = open('count_result.txt','w')
+
+    f = open(join(output_path, each_prefix+'_count_result.txt'),'w')
     f.write(("AminoAcid\tCodon\tCount\n"))
     codon_count_pair = list(dict_2.values()) # values are in a list   [{'GAT': 78, 'GAC': 18}, {'GTG': 38, 'GTA': 20, 'GTT': 50, 'GTC': 24}]
     for n in range (0,len(codon_count_pair)):
@@ -93,10 +117,26 @@ def codonCount(filename):
 
     print('Counting finished, check your output file: count_reult.txt')
 
-    return()
+
+def Main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("infile", help = "path/to/your/cds.fasta file, you must feed at least one cds.fasta file or multiple cds.fasta files, speperated by comma")
+    parser.add_argument("--outputDir", help="path/to/your/output_directory")
+    parser.add_argument("--prefix", help="a few characters of prefix to tag your output result files, e.g. gsf533_; multiple prefixes should be passed correspondingly with your multiple input files,spereted by comma")
+    args = parser.parse_args()
+
+    infiles = args.infile.split(",")
+    output_path = args.outputDir
+    prefix = args.prefix.split(",")
+    for each_infile in infiles:
+        for each_prefix in prefix:
+            codonCount(each_infile,output_path,each_prefix)      ## function_name(argv.pass_variable)
 
 
-## now test it:
 
-codonCount(filename)
+if __name__ =='__main__':
+    Main()
+
+
 
