@@ -9,7 +9,7 @@ Introduction:
 -CodonPreference is designed to analysis codon bias/preference in your organisms of interest.
 I will keep it update for the downstream related analysis.
 
--InputFile:CDS file in fasta format\n
+-InputFile:CDS file in fasta format
 -outputFile:your_prefix_count_result.txt
 ##
 Workflow:
