@@ -1,4 +1,6 @@
+
 #!/usr/bin/python
+from __future__ import division
 __author__ = 'chenmingcui'
 
 
@@ -8,10 +10,12 @@ import argparse
 from Bio import SeqIO
 from Bio.Seq import Seq
 from os.path import join
+import numpy as np
+
 
 #filename = sys.argv[1:]
 #outpath = sys.argv[2]
-
+#def codonCount("/Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample1.cds.fasta"):
 def codonCount(filename,output_path,each_prefix):
     """
     This function is to count codon useage in your transcriptome.
@@ -97,8 +101,20 @@ def codonCount(filename,output_path,each_prefix):
             aa = dict_1[codon]
             codon_count_dict = dict_2[aa]
             codon_count_dict[codon] += 1
+##? test
+            # codon_total_count_of_each_aa =0
+            # codon_count_of_aa = list(codon_count_dict.values())
+            # for n in range (0, len(codon_count_of_aa)):
+            #     codon_total_count_of_each_aa += codon_count_of_aa[n]
+            #     Codon_bias = (codon_count_dict[codon]/codon_total_count_of_each_aa) if codon_total_count_of_each_aa != 0 else 0
 
 
+
+
+
+
+
+##?
     #for k, v in dict_2.items():   # dict2 now has the count updated, print to check
     #    print (k,v)
 
@@ -106,16 +122,36 @@ def codonCount(filename,output_path,each_prefix):
     ## print the count into a table
 
     f = open(join(output_path, each_prefix+'_count_result.txt'),'w')
-    f.write(("AminoAcid\tCodon\tCount\n"))
+    f.write(("AminoAcid\tCodon\tCount\tBias\n"))
     codon_count_pair = list(dict_2.values()) # values are in a list   [{'GAT': 78, 'GAC': 18}, {'GTG': 38, 'GTA': 20, 'GTT': 50, 'GTC': 24}]
     for n in range (0,len(codon_count_pair)):
            codons =list(codon_count_pair[n].keys())
            for m in range (0,len(codons)):
                count = codon_count_pair[n][codons[m]]
-               f.write(dict_1[codons[m]] + '\t' + codons[m] + '\t' + str(count) + '\n')
+               bias = float(count)/sum(codon_count_pair[n].values())
+               f.write(dict_1[codons[m]] + '\t' + codons[m] + '\t' + str(count) + '\t' + '{0:.2f}'.format(bias) + '\n')
     f.close()
 
-    print('Counting finished, check your output file: count_reult.txt')
+    print('Counting finished, check your output file.')
+
+
+    # result_count_txt = np.loadtxt(join(output_path, each_prefix+'_count_result.txt')
+    # result_bias_txt = np.zeros(result_count_txt.shape(65,4))
+    # for lines in result_txt:
+    #     line = lines.split('\t')
+    #     for i in range of (1,65) # skip the header line of the result file
+    #         if line[i][0] == line[i+1][0]:
+    #             codon_count_eachAA = 0
+    #             codon_count_eachAA+=line[i][2]
+    #             codon_bias = line[i][2]/codon_count_eachAA if codon_count_eachAA !=0 else 0
+    #             for n in range(1,65):
+    #                 result_bias_txt[3,n] = codon_bias
+    #         else:
+    #             break
+    # result_count_txt.close()
+
+
+
 
 
 def Main():
