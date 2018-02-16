@@ -46,3 +46,9 @@ optional arguments:
                         files,spereted by comma
 
 ```
+##
+future work
+###
+- predict the tRNA from input genomes using tRNAscan-SE 
+- normalize the tRNA copy numbers with total amino acids number
+- correlation analysis

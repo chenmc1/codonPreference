@@ -101,20 +101,7 @@ def codonCount(filename,output_path,each_prefix):
             aa = dict_1[codon]
             codon_count_dict = dict_2[aa]
             codon_count_dict[codon] += 1
-##? test
-            # codon_total_count_of_each_aa =0
-            # codon_count_of_aa = list(codon_count_dict.values())
-            # for n in range (0, len(codon_count_of_aa)):
-            #     codon_total_count_of_each_aa += codon_count_of_aa[n]
-            #     Codon_bias = (codon_count_dict[codon]/codon_total_count_of_each_aa) if codon_total_count_of_each_aa != 0 else 0
 
-
-
-
-
-
-
-##?
     #for k, v in dict_2.items():   # dict2 now has the count updated, print to check
     #    print (k,v)
 
@@ -134,21 +121,12 @@ def codonCount(filename,output_path,each_prefix):
 
     print('Counting finished, check your output file.')
 
+def cov_tRNA_codon():
 
-    # result_count_txt = np.loadtxt(join(output_path, each_prefix+'_count_result.txt')
-    # result_bias_txt = np.zeros(result_count_txt.shape(65,4))
-    # for lines in result_txt:
-    #     line = lines.split('\t')
-    #     for i in range of (1,65) # skip the header line of the result file
-    #         if line[i][0] == line[i+1][0]:
-    #             codon_count_eachAA = 0
-    #             codon_count_eachAA+=line[i][2]
-    #             codon_bias = line[i][2]/codon_count_eachAA if codon_count_eachAA !=0 else 0
-    #             for n in range(1,65):
-    #                 result_bias_txt[3,n] = codon_bias
-    #         else:
-    #             break
-    # result_count_txt.close()
+
+
+
+
 
 
 
