@@ -16,7 +16,7 @@ import numpy as np
 #filename = sys.argv[1:]
 #outpath = sys.argv[2]
 #def codonCount("/Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample1.cds.fasta"):
-def codonCount(filename,output_path,each_prefix):
+def codonCount(each_infile,output_path,each_prefix):
     """
     This function is to count codon useage in your transcriptome.
     The input file is the cds fasta file that generated from transdecoder.
@@ -59,9 +59,9 @@ def codonCount(filename,output_path,each_prefix):
     ## check if file exists
 
     try:
-       f = open(filename)
+       f = open(each_infile)
     except IOError:
-       print('No such file: %s' %filename)
+       print('No such file: %s' %each_infile)
 
     ## read a fasta file
     seqs={}
@@ -121,30 +121,21 @@ def codonCount(filename,output_path,each_prefix):
 
     print('Counting finished, check your output file.')
 
-def cov_tRNA_codon():
-
-
-
-
-
-
-
-
-
 
 def Main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description= "calculate codon bias of a genome")
 
-    parser.add_argument("infile", help = "path/to/your/cds.fasta file, you must feed at least one cds.fasta file or multiple cds.fasta files, speperated by comma")
-    parser.add_argument("--outputDir", help="path/to/your/output_directory")
-    parser.add_argument("--prefix", help="a few characters of prefix to tag your output result files, e.g. sample1_; multiple prefixes should be passed correspondingly with your multiple input files,spereted by comma")
+    parser.add_argument('-i', "--infile", help = "path/to/your/cds.fasta file, you must feed at least one cds.fasta file or multiple cds.fasta files, speperated by comma without space")
+    parser.add_argument('-o', "--outputDir", help="path/to/your/output_directory")
+    parser.add_argument('-p', "--prefix", help="a few characters of prefix to tag your output result files, e.g. sample1_; multiple prefixes should be passed correspondingly with your multiple input files,spereted by comma without space")
+
     args = parser.parse_args()
 
     infiles = args.infile.split(",")
     output_path = args.outputDir
-    prefix = args.prefix.split(",")
+    prefixes = args.prefix.split(",")
     for each_infile in infiles:
-        for each_prefix in prefix:
+        for each_prefix in prefixes:
             codonCount(each_infile,output_path,each_prefix)      ## function_name(argv.pass_variable)
 
 
@@ -153,4 +144,5 @@ if __name__ =='__main__':
     Main()
 
 
-
+#commend to run it
+#python codonCount.py -i /Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample1.cds.fasta,/Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample2.cds.fasta,/Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample3.cds.fasta -o /Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/test_dir/ -p SAM1_,SAM2_,SAM3_
