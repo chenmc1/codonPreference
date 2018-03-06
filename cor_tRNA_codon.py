@@ -40,6 +40,9 @@ def cor_tRNA_codon(each_genome_fastafile,output_path,each_codoncount_file):
     tRNA_data = pd.read_csv(join(output_path, each_prefix + '_tRNAscan_result.txt'), sep='\t', skiprows=(0,1), header=0)
     anticodon_df = tRNA_data.iloc[:, 5]  # slice the anti_codon column #5
     anticodon_list = list(anticodon_df)  # anticodons are in the list now
+    tRNA_data['length'] = tRNA_data.iloc[:, 2].sub(tRNA_data.iloc[:, 3], axis=0).abs()# getting gene length by substracting
+                                                                                     # col2 and col3 based on column index0
+
 
     ## complement and reverse the anticodon for matching the codon dictionary
     my_codon_list = []
@@ -73,7 +76,7 @@ def cor_tRNA_codon(each_genome_fastafile,output_path,each_codoncount_file):
     ## save correlation to file and plot the correlation
     final = open(join(output_path, each_prefix + '_correlation.txt'), 'w')
     final.write(cor)
-    final.close
+    final.close ()
     sns.regplot(x="Bias", y="tRNA_copy_N", data=merged_inner)
     #plt.show()  # plot in the pycharm
     plt.savefig(join(output_path, each_prefix + '_correlation.plot')
