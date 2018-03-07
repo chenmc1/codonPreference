@@ -3,9 +3,6 @@
 Authors: Chenming Cui and Aureliano Bombarely
 ##
 ##
-张镱潇，我来了，你在哪？
-##
-##
 Citation: 
 - Lowe, T.M. & Eddy, S.R. (1997) tRNAscan-SE: A program for improved detection of transfer RNA genes in genomic sequence. Nucl. Acids Res. 25: 955-964.
 ## 
