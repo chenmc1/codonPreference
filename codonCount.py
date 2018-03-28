@@ -146,3 +146,4 @@ if __name__ =='__main__':
 
 #commend to run it
 #python codonCount.py -i /Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample1.cds.fasta,/Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample2.cds.fasta,/Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/sample3.cds.fasta -o /Users/chenmingcui/Documents/A-PhD_research_projects/PhD_Project/codonPreference/test_dir/ -p SAM1_,SAM2_,SAM3_
+#
