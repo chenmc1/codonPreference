@@ -1,17 +1,9 @@
 
 
 import os
-import sys
-import argparse
-import pandas as pd
-from Bio import SeqIO
-from Bio.Seq import Seq
+
 from os.path import join
-import numpy as np
-import csv
-import seaborn as sns
-import matplotlib.pyplot as plt
-import subprocess
+
 
 
 #each_cdsfile ='Cannuum_CA00562_Trinity.cds.fa'
