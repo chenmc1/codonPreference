@@ -116,7 +116,7 @@ def mergeGet64count(df_tRNA_data, df_rc):
     tRNA_data_rc = pd.merge(df_tRNA_data, df_rc, how='inner', on='Sequence Name')
     if tRNA_data_rc.empty:
         print('Dateframe merge Error! Dataframe: tRNA_data_rc is empty.')
-        print('Making sure that 'Sequence Name' in reads count file and tRNA-scan result file is same sort of gene IDs')
+        print('Making sure that "Sequence Name" in reads count file and tRNA-scan result file is same sort of gene IDs')
         sys.exit(1)
 
     return tRNA_data_rc
