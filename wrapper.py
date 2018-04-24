@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from __future__ import division
 __author__ = 'chenmingcui'
 
 
@@ -15,7 +15,6 @@ import csv
 import seaborn as sns
 import matplotlib.pyplot as plt
 import subprocess
-from __future__ import division
 from config import check_dependencies,checkHeader_readscountfile,check_CDSfasta
 import config
 from codonCount import *
