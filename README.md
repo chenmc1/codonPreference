@@ -9,9 +9,12 @@ Citation:
 Introduction:
 ###
 - CodonPreference is designed to analysis codon bias/preference in your organisms of interest. Specially, it performs correlation
-  analysis on codon bias of each amino acid and tRNA copy numbers in your genomes.
-- InputFile:CDS file in fasta format and genome file in fasta format. It support multiple input files.
-- outputFile:your_prefix_count_result.txt; correlation_result.txt; correlation analysis plot
+  analysis on codon bias of the degenerated codons, tRNA gene copy numbers and its expression level in your genomes.
+  Codon bias was defined as: (each condon count in the degenerate codons - average codon count of the degenerate codons)/average codon count of the degenerate codons.
+- InputFile: CDS file in fasta format, genome file in fasta format, reads count matrix file with gene id and reads count columns header as "Sequence_Name" and "Count". It support multiple input files.
+  Please specify your organsim from these categories: bacteria, eukaryotic, archaeal and mitochondrial, otherwise the default is eukaryotic.
+  Reads count matrix file can be generated from RNASeq data using this script: https://github.com/chenmc1/illuminaRaw2CountMatrix-DGE
+- OutputFile: your_prefix_count_result.txt; correlation_result.txt; correlation analysis plot.
 
 ##
 Workflow:
@@ -19,11 +22,11 @@ Workflow:
 - If you start with raw reads, be sure to process it and assembly your reads into assemblies in fasta format using 
   some proper pipeline. Otherwise you can jump to next step directly.   
 - Prepare your_organism_cds.fasta files using "transdecoder" or other similar CDS estimating packages.
-- Run the codonCount.py script, see the usage manual below.
-- Collect your codon count result downstream analysis.
-- Searching for tRNA genes in genomic sequence.
-- Correlation analysis on codon bias of each anmino acid and tRNA copy numbers.
-- Save result and plot the correlation.
+- Counted frequency of codons and its bias in the cds fasta file.
+- Searched for tRNA genes in genomic sequence via tRNAscan-SE.
+- Calculated the expression levels ("fpkm") of tRNA genes in your genome.  
+- Correlation analysis on codon bias of each anmino acid, tRNA gene copy numbers and tRNA gene expression levels.
+- Saved result and plot the correlation.
 ##
 Dependencies and Requirements:
 ###
@@ -34,25 +37,40 @@ Dependencies and Requirements:
   * seaborn
   * matplotlib
   * numpy
-- software: tRNAscan-SE install via [here](http://lowelab.ucsc.edu/tRNAscan-SE/) and put into your path
+  * csv
+- software: tRNAscan-SE install via [here](http://lowelab.ucsc.edu/tRNAscan-SE/) and put it into your path
 ##
 Usage
+
+
 ```
-Usage: codonCount.py 
+usage: wrapper.py [-h]
+                  [-organism {bacteria,eukaryotic,archaeal,mitochondrial}]
+                  genome_fastafile cds_fastafile reads_countfile outputDir
 
+corelation analysis on condon bias, tRNA gene copy number and expression level
+in the genome of your interest.
 
-arguments:
-   -h, --help            show this help message and exit
-  '-i', "--infile", help = "path/to/your/cds.fasta file, you must feed at least one cds.fasta file or multiple cds.fasta files, speperated by comma without space"
-  '-o', "--outputDir", help="path/to/your/output_directory"
-  '-p', "--prefix", help="a few characters of prefix to tag your output result files, e.g. sample1_; multiple prefixes should be passed correspondingly with your multiple input files,spereted by comma without space"
+positional arguments:
+  genome_fastafile      path/to/your/genome.fasta file, you must feed at least
+                        one genome.fasta file or multiple genome.fasta files,
+                        speperated by comma
+  cds_fastafile         path/to/your/cds.fasta file', you must feed at least
+                        one cds.fasta file or multiple genome.fasta files,
+                        speperated by comma
+  reads_countfile       path/to/your/reads_countfile, you must feed at least
+                        one reads_countfile or multiple reads_count files,
+                        speperated by comma
+  outputDir             path/to/your/output_directory
 
-Usage: cor_tRNA_codon.py
+optional arguments:
+  -h, --help            show this help message and exit
+  -organism {bacteria,eukaryotic,archaeal,mitochondrial}
+                        Please specify the organism that you are searching
+                        tRNA in these four organsim types
+                        'bacteria','eukaryotic','archaeal','mitochondrial'.The
+                        default organsim is eukaryotic'
 
-arguments:
-  '-i', "--genome_fastafile", help = "path/to/your/genome.fasta file, you must feed at least one genome.fasta file or multiple genome.fasta files, speperated by comma"
-  '-c', "--codoncount_file", help = "path/to/your/codoncount_file, the result file of step 1. you must feed at least one genome.fasta file or multiple genome.fasta files, speperated by comma"
-  '-o', "--outputDir", help = "path/to/your/output_directory"
 
 
 ```
