@@ -15,8 +15,7 @@ import csv
 import seaborn as sns
 import matplotlib.pyplot as plt
 import subprocess
-from config import check_dependencies,checkHeader_readscountfile,check_CDSfasta
-import config
+from config import *
 from codonCount import *
 from cor_analysis import *
 
@@ -26,17 +25,17 @@ from cor_analysis import *
 def get_args():
     parser = argparse.ArgumentParser(
         description="corelation analysis on condon bias, tRNA gene copy number and expression level in the genome of your interest.")
-
-    parser.add_argument("-a", "genome_fastafile", required = True,
+    #parser.add_argument('--version', action='version', version="codonPreference1.0")
+    parser.add_argument("genome_fastafile",
                         help="path/to/your/genome.fasta file, you must feed at least one genome.fasta file or multiple genome.fasta files, speperated by comma")
 
-    parser.add_argument("-b", "cds_fastafile", required= True,
+    parser.add_argument("cds_fastafile",
                         help="path/to/your/cds.fasta file', you must feed at least one cds.fasta file or multiple genome.fasta files, speperated by comma")
 
-    parser.add_argument("-c", "reads_countfile", required = True,
+    parser.add_argument("reads_countfile",
                         help="path/to/your/reads_countfile, you must feed at least one reads_countfile or multiple reads_count files, speperated by comma")
 
-    parser.add_argument("-o", "outputDir", required = True, help="path/to/your/output_directory")
+    parser.add_argument("outputDir", help="path/to/your/output_directory")
 
     parser.add_argument('-organism', default='eukaryotic',
                         choices=['bacteria', 'eukaryotic', 'archaeal', 'mitochondrial'],
