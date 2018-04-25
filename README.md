@@ -9,7 +9,7 @@ Citation:
 Introduction:
 ###
 - CodonPreference is designed to analysis codon bias/preference in your organisms of interest. Specially, it performs correlation
-  analysis on codon bias of the degenerated codons, tRNA gene copy numbers and its expression level in your genomes.
+  analysis on codon bias of degenerated codons, tRNA gene copy numbers and its expression level in your genomes.
   Codon bias was defined as: (each condon count in the degenerate codons - average codon count of the degenerate codons)/average codon count of the degenerate codons.
 - InputFile: CDS file in fasta format, genome file in fasta format, reads count matrix file with gene id and reads count columns header as "Sequence_Name" and "Count". It support multiple input files.
   Please specify your organsim from these categories: bacteria, eukaryotic, archaeal and mitochondrial, otherwise the default is eukaryotic.
@@ -74,3 +74,12 @@ optional arguments:
 
 
 ```
+
+## 
+About
+##
+###
+[Contact me!]chenmc1@vt.edu
+###
+
+
