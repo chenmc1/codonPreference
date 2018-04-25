@@ -77,9 +77,8 @@ optional arguments:
 
 ## 
 About
-##
 ###
-[Contact me!]chenmc1@vt.edu
-###
+Contact me![mailto](mailto:<chenmc1@vt.edu>)
+
 
 
