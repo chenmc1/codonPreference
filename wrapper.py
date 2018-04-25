@@ -146,8 +146,9 @@ def Main():
 
 
 if __name__ =='__main__':
-    if len(sys.argv) ==1 :
-         print ("please provide 4 necessary files to run the program!")
+    if len(sys.argv) < 6 :
+         print ("please provide 3 necessary files and output path to run the program!")
+         print ("python wrapper.py genome_fastafile cds_fastafile readscount_file outDirPath organism")
          print ("please refer to the user manual or -h for help")
 
     Main()
